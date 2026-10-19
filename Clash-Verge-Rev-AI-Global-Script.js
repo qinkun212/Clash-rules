@@ -86,6 +86,7 @@ function main(config) {
   // ==================================================
   // 4. AI 节点过滤
   // 美国 / 日本 / 新加坡 / 台湾
+  // 排除游戏 / GAME / Gaming 专线
   // ==================================================
 
   const aiNodeFilter =
@@ -124,6 +125,9 @@ function main(config) {
     "\\bTW[0-9]*\\b" +
     ")";
 
+  // 排除游戏线路（例如：GAME 台湾｜游戏专用）
+  const aiNodeExcludeFilter = "(?i)(game|gaming|游戏|遊戲)";
+
   // ==================================================
   // 5. 创建 AI 策略组
   // ==================================================
@@ -133,25 +137,29 @@ function main(config) {
       name: "🤖 ChatGPT",
       type: "select",
       "include-all": true,
-      filter: aiNodeFilter
+      filter: aiNodeFilter,
+      "exclude-filter": aiNodeExcludeFilter
     },
     {
       name: "💎 Gemini",
       type: "select",
       "include-all": true,
-      filter: aiNodeFilter
+      filter: aiNodeFilter,
+      "exclude-filter": aiNodeExcludeFilter
     },
     {
       name: "🟠 Claude",
       type: "select",
       "include-all": true,
-      filter: aiNodeFilter
+      filter: aiNodeFilter,
+      "exclude-filter": aiNodeExcludeFilter
     },
     {
       name: "🧠 AI Other",
       type: "select",
       "include-all": true,
-      filter: aiNodeFilter
+      filter: aiNodeFilter,
+      "exclude-filter": aiNodeExcludeFilter
     }
   ];
 
